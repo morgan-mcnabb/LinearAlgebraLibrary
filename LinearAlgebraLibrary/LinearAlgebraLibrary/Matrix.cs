@@ -3,7 +3,7 @@
 
 namespace LinearAlgebraLibrary
 {
-    class Matrix : LAToolkit
+    public class Matrix : LAToolkit
     {
         public int Rows { get; set; }
         public int Columns { get; set; }
@@ -27,6 +27,29 @@ namespace LinearAlgebraLibrary
                 {
                     Values[rowNum, columnNum] += valToAdd;
                 }
+            }
+        }
+
+        public override void Add(Matrix otherMatrix)
+        {
+            try
+            {
+                if (!SameMatrixDimensions(otherMatrix))
+                    throw new Exception("Matrices must have same dimensions");
+                else
+                {
+                    for (int rowNum = 0; rowNum < Rows; rowNum++)
+                    {
+                        for (int columnNum = 0; columnNum < Columns; columnNum++)
+                        {
+                            Values[rowNum, columnNum] += otherMatrix.Values[rowNum, columnNum];
+                        }
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
 
@@ -83,8 +106,31 @@ namespace LinearAlgebraLibrary
             {
                 for (int columnNum = 0; columnNum < Columns; columnNum++)
                 {
-                    Values[rowNum, columnNum] += valToSub;
+                    Values[rowNum, columnNum] -= valToSub;
                 }
+            }
+        }
+
+        public override void Subtract(Matrix otherMatrix)
+        {
+            try
+            {
+                if (!SameMatrixDimensions(otherMatrix))
+                    throw new Exception("Matrices must have same dimensions");
+                else
+                {
+                    for (int rowNum = 0; rowNum < Rows; rowNum++)
+                    {
+                        for (int columnNum = 0; columnNum < Columns; columnNum++)
+                        {
+                            Values[rowNum, columnNum] -= otherMatrix.Values[rowNum, columnNum];
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
 
@@ -115,6 +161,9 @@ namespace LinearAlgebraLibrary
 
         private double NextDouble(double minimumDouble, double maximumDouble) =>
             randomVal.NextDouble() * (maximumDouble - minimumDouble) + minimumDouble;
+
+        public bool SameMatrixDimensions(Matrix otherMatrix) =>
+            (this.Rows == otherMatrix.Rows) && (this.Columns == otherMatrix.Columns);
 
     }
 }

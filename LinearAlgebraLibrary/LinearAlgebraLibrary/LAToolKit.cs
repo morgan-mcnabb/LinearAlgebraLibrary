@@ -2,7 +2,7 @@
 
 namespace LinearAlgebraLibrary
 {
-    abstract class LAToolkit
+    public abstract class LAToolkit
     {
 
         public abstract void Add(int n);
@@ -15,6 +15,15 @@ namespace LinearAlgebraLibrary
 
         public abstract void Multiply(int n);
 
+        public virtual void Add(Matrix n)
+        {
+
+        }
+
+        public virtual void Subtract(Matrix n)
+        {
+
+        }
         public virtual Matrix Multiply(Matrix n)
         {
             return default;

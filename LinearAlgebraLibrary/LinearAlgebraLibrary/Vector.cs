@@ -3,7 +3,7 @@
 
 namespace LinearAlgebraLibrary
 {
-    class Vector : LAToolkit
+    public class Vector : LAToolkit
     {
         public override void Add(int n)
         {
